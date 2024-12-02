@@ -3,7 +3,6 @@ package kfd.tasktracker.service.impl
 import kfd.tasktracker.database.entity.User
 import kfd.tasktracker.database.repository.UserDao
 import kfd.tasktracker.model.request.UserRequest
-import kfd.tasktracker.model.response.DeletedResponse
 import kfd.tasktracker.model.response.TaskResponse
 import kfd.tasktracker.model.response.UserResponse
 import kfd.tasktracker.service.UserService
@@ -47,10 +46,9 @@ class UserServiceImpl(
         return mapper.entityToResponse(dao.save(entity))
     }
 
-    override fun delete(id: Long) : DeletedResponse {
+    override fun delete(id: Long) {
         val entity = getById(id)
         dao.delete(entity)
-        return DeletedResponse()
     }
 
 }

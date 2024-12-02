@@ -19,5 +19,5 @@ class UserController(
     @PostMapping
     fun create(@RequestBody request: UserRequest) = service.create(request)
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable("id") id: Long, response: HttpServletResponse) = service.delete(id)
+    fun delete(@PathVariable("id") id: Long, response: HttpServletResponse) = service.delete(id).also { response.status = 204 }
 }

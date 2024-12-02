@@ -3,7 +3,6 @@ package kfd.tasktracker.service.impl
 import kfd.tasktracker.database.entity.State
 import kfd.tasktracker.database.repository.StateDao
 import kfd.tasktracker.model.request.StateRequest
-import kfd.tasktracker.model.response.DeletedResponse
 import kfd.tasktracker.model.response.StateResponse
 import kfd.tasktracker.service.StateService
 import kfd.tasktracker.util.StateMapper
@@ -29,10 +28,9 @@ class StateServiceImpl(
         return mapper.entityToResponse(dao.save(entity))
     }
 
-    override fun delete(id: Long) : DeletedResponse {
+    override fun delete(id: Long) {
         val entity = getById(id)
         dao.delete(entity)
-        return DeletedResponse()
     }
 
 }
