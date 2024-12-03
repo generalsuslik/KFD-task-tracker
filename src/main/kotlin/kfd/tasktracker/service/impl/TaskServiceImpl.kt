@@ -2,7 +2,9 @@ package kfd.tasktracker.service.impl
 
 import kfd.tasktracker.database.entity.Task
 import kfd.tasktracker.database.repository.TaskDao
+import kfd.tasktracker.exception.exception.NotFoundException
 import kfd.tasktracker.model.request.TaskRequest
+import kfd.tasktracker.model.response.DeletedResponse
 import kfd.tasktracker.model.response.TaskResponse
 import kfd.tasktracker.service.StateService
 import kfd.tasktracker.service.TaskService
@@ -23,10 +25,14 @@ class TaskServiceImpl(
         }
 
     override fun getById(id: Long): TaskResponse =
-        mapper.entityToResponse(dao.findById(id).orElseThrow { throw RuntimeException("") })
+        mapper.entityToResponse(dao.findById(id).orElseThrow {
+            NotFoundException("Could not find task with id: $id")
+        })
 
     override fun update(id: Long, request: TaskRequest): TaskResponse {
-        val entity = dao.findById(id).orElseThrow { throw RuntimeException("") }
+        val entity = dao.findById(id).orElseThrow {
+            NotFoundException("Could not find task with id: $id")
+        }
             .apply {
                 title = request.title
                 description = request.description
@@ -47,8 +53,11 @@ class TaskServiceImpl(
         return mapper.entityToResponse(dao.save(entity))
     }
 
-    override fun delete(id: Long) {
-        val entity = dao.findById(id).orElseThrow { throw RuntimeException("") }
+    override fun delete(id: Long): DeletedResponse {
+        val entity = dao.findById(id).orElseThrow {
+            NotFoundException("Could not find task with id: $id")
+        }
         dao.delete(entity)
+        return DeletedResponse()
     }
 }

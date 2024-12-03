@@ -3,7 +3,7 @@ spring:
     name: task-tracker
 
   datasource:
-    url: jdbc:h2:file:/data/KFD;
+    url: jdbc:h2:file:./data/KFD;
     username: tracker
     password: pass
     driver-class-name: org.h2.Driver
