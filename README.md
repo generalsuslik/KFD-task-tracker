@@ -1,5 +1,10 @@
 # Task Tracker
 
+## [General Suslik](https://github.com/generalsuslik) here:
+### [YT link](https://youtu.be/u5d4y3D-6lg)
+
+<hr>
+
 ## 📚 Stack
 
 * Kotlin 1.9.25 - Project language.  
